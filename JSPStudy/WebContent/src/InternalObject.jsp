@@ -10,19 +10,21 @@
 </head>
 <body>
 <%-- out内置对象的应用 --%>
-<%	out.newLine();
+<%	//输出文本，尤其注意换行符的使用
+	out.newLine();
 	out.println("Print line 1");
 	out.print("Print line 2");
 	out.print("Print line 3<br/>");
+	//输出缓冲区大小和剩余大小
 	out.println("缓冲区大小："+out.getBufferSize()+"<br/>");
 	out.println("剩余缓冲区："+out.getRemaining()+"<br/>");
-	out.flush();
-	out.println("缓冲区大小："+out.getBufferSize()+"<br/>");
-	out.println("剩余缓冲区："+out.getRemaining()+"<br/>");
-	out.clearBuffer();
-	out.println("缓冲区大小："+out.getBufferSize()+"<br/>");
-	out.println("剩余缓冲区："+out.getRemaining()+"<br/>");
-	%>
+	//flush操作，注意缓冲区
+	//out.flush();
+	//clearbuffer操作，注意缓冲区
+	//out.clearBuffer();
+	//clear操作与clearBuffer类似，但是不可用于flush之后
+	//以上out操作会影响后面的自动刷新功能
+%>
 <%-- request内置对象的应用 --%>
 <%-- 新建一个表单，包含一个输入框和一个按钮 --%>
 <form action="" method="post">
@@ -38,5 +40,15 @@
 远程地址：<%= request.getRemoteAddr() %><br/>
 远程端口：<%= request.getRemoteHost() %><br/>
 获取表单参数：<%= request.getParameter("username") %><br/>
+<%-- response内置对象的应用 --%>
+<%	response.setHeader("Cache-Control", "no-cache"); //不会被存储进入缓存，可有public, private等
+	response.setIntHeader("Refresh", 2);//每隔2秒自动刷新一次
+	out.println("date is "+new java.util.Date().toString());//显示当前时间
+	//response.sendRedirect("http://github.com/Violape"); //直接跳转，不保留在原网页中
+	//以下为cookie操作
+	Cookie myCookie = new Cookie("a","b");//关键字为a,值为b
+	myCookie.setMaxAge(3600);//最大存活时间为1小时
+	response.addCookie(myCookie);//添加Cookie
+%>
 </body>
 </html>
