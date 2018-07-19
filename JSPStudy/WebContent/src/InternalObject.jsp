@@ -1,6 +1,6 @@
 <%@ page language="java"
-	contentType="text/html; charset=GB18030"
-    pageEncoding="GB18030"
+	contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
     buffer="10kb"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,18 +9,34 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%-- out���ö����Ӧ�� --%>
+<%-- out内置对象的应用 --%>
 <%	out.newLine();
 	out.println("Print line 1");
 	out.print("Print line 2");
 	out.print("Print line 3<br/>");
-	out.println("��������С��"+out.getBufferSize()+"<br/>");
-	out.println("ʣ�໺������"+out.getRemaining()+"<br/>");
+	out.println("缓冲区大小："+out.getBufferSize()+"<br/>");
+	out.println("剩余缓冲区："+out.getRemaining()+"<br/>");
 	out.flush();
-	out.println("��������С��"+out.getBufferSize()+"<br/>");
-	out.println("ʣ�໺������"+out.getRemaining()+"<br/>");
+	out.println("缓冲区大小："+out.getBufferSize()+"<br/>");
+	out.println("剩余缓冲区："+out.getRemaining()+"<br/>");
 	out.clearBuffer();
-	out.println("��������С��"+out.getBufferSize()+"<br/>");
-	out.println("ʣ�໺������"+out.getRemaining()+"<br/>");%>
+	out.println("缓冲区大小："+out.getBufferSize()+"<br/>");
+	out.println("剩余缓冲区："+out.getRemaining()+"<br/>");
+	%>
+<%-- request内置对象的应用 --%>
+<%-- 新建一个表单，包含一个输入框和一个按钮 --%>
+<form action="" method="post">
+	<input type="text" name="username"/>
+	<input type="submit" value="提交"/>
+</form>
+<%-- request相关功能 --%>
+请求方法：<%= request.getMethod() %><br/>
+请求文件：<%= request.getRequestURI() %><br/>
+请求协议：<%= request.getProtocol() %><br/>
+服务器地址：<%= request.getServerName() %><br/>
+服务器端口：<%= request.getServerPort() %><br/>
+远程地址：<%= request.getRemoteAddr() %><br/>
+远程端口：<%= request.getRemoteHost() %><br/>
+获取表单参数：<%= request.getParameter("username") %><br/>
 </body>
 </html>
