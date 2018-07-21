@@ -49,6 +49,24 @@
 	Cookie myCookie = new Cookie("a","b");//关键字为a,值为b
 	myCookie.setMaxAge(3600);//最大存活时间为1小时
 	response.addCookie(myCookie);//添加Cookie
-%>
+%>	
+<%-- page内置对象的应用 --%>
+<%	out.println("page对象的字符串："+page.toString());
+%><br/>
+<%-- exception内置对象的应用 --%>
+<%	//out.println(exception.getMessage());
+	//out.println(exception.toString());
+	//out.println(exception.printStackTrace());
+%><br/>
+<%-- pagecontext内置对象的应用 --%>
+<%
+	JspWriter myOut = pageContext.getOut();
+	myOut.println("Hello world!");
+%><br/>
+<%
+	pageContext.setAttribute("username", "Violape", pageContext.SESSION_SCOPE);
+	String value = session.getAttribute("username").toString();
+	out.println(value);
+%><br/>
 </body>
 </html>
